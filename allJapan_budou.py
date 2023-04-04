@@ -2,8 +2,9 @@ import requests
 import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium.common.exceptions import InvalidElementStateException
 import csv
 import re
@@ -66,7 +67,8 @@ print("result2  length is ",  len(result2))
 i = 0
 while(i < len(result2)):
   print("LOOP START", i)
-  search_box = driver.find_element_by_name('q')
+  #search_box = driver.find_element_by_name('q')
+  search_box = driver.find_element(By.NAME, 'q')
 
   try:
     search_box.clear()
@@ -116,15 +118,15 @@ while (i < len(result2)):
 print(new_result)
 print("length is  :", len(new_result))
 
-
+outCsvFile = 'budou_facility.csv'
 ############################## Create CSV file ###########
-if os.path.exists('budou_facility.csv'):
-  os.remove('budou_facility.csv')
+if os.path.exists(outCsvFile):
+  os.remove(outCsvFile)
 
 
 #with open('budou_facility.csv', 'w', newline='\r\n') as csvfile:
 #with open('budou_facility.csv', 'w') as csvfile:
-with open('budou_facility.csv', 'w', newline='\n') as csvfile:
+with open(outCsvFile, 'w', newline='\n') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(new_result)
 
