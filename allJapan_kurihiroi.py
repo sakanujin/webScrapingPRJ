@@ -17,7 +17,7 @@ phone_list = []
 new_result = []
 
 
-url = "https://www.mapple.net/sp/nashigari/"
+url = "https://www.mapple.net/sp/kurihiroi/"
 r   = requests.get(url)
 
 soup = BeautifulSoup(r.text, "html.parser")
@@ -33,7 +33,7 @@ numOfLinks = len(links)
 i = 0
 while (i < numOfLinks):
   url = links[i] 
-  if ("http" in url) and ("nashi" in url) and ("www" in url):
+  if ("http" in url) and ("kurihiroi" in url) and ("www" in url):
     response = requests.get(url)
     html = response.content
     soup = BeautifulSoup(html, 'html.parser')
@@ -118,7 +118,7 @@ while (i < len(result2)):
 print(new_result)
 print("length is  :", len(new_result))
 
-outCsvFile = 'nashi_facility.csv'
+outCsvFile = 'kurihiroi_facility.csv'
 ############################## Create CSV file ###########
 if os.path.exists(outCsvFile):
   os.remove(outCsvFile)
