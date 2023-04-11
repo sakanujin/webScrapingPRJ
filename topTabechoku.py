@@ -9,7 +9,7 @@ from selenium.common.exceptions import InvalidElementStateException
 import csv
 import re
 from urllib.parse import urljoin
-import libJalan as jln
+#import libJalan as jln
 
 def get_phone_number(url):
     """指定したURLのページから電話番号を取得する"""
@@ -66,8 +66,8 @@ producers = [list(x) for x in delDuplicateProducer]
 query = producers
 
 i=0 
-while ( i < len(query)): 
-#while ( i < 50): 
+#while ( i < len(query)): 
+while ( i < 250): 
   try:
     url = "https://www.google.com/search?q=" + query[i][0] + query[i][1]
     r = requests.get(url)
@@ -77,8 +77,10 @@ while ( i < len(query)):
       url = re.findall(r"(?<=/url\?q=)(htt.*://.*)", result["href"])[0]
       if "google" not in url and "youtube" not in url:
         phone_number = get_phone_number(url)
-        print("number :", i, query[i][0],  query[i][1], phone_number)
+        print("number :", i, query[i][0],  query[i][1], phone_number, url)
+        #print("search result :",search_result) 
         query[i].append(phone_number)
+        query[i].append(url)
       break;
   except:
       pass
@@ -91,3 +93,4 @@ while ( i < len(query)):
 with open('tabechoku_list.csv', mode='w', newline = '\n', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerows(query)
+
